@@ -4,6 +4,7 @@ from rest_framework import status, generics, filters
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import (
+    AllowAny,
     IsAuthenticated,
     IsAdminUser
 )
@@ -197,6 +198,8 @@ def logout_user(request):
             status=status.HTTP_400_BAD_REQUEST
         )
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def register_user(request):
 
     serializer = UserRegisterSerializer(
